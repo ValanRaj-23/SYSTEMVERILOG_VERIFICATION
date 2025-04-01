@@ -1,25 +1,22 @@
 class generator;
-  virtual intf vinf;
   transaction trans;
   mailbox mb_gen;
+  event next;
   
-  function new(virtual intf vinf, mailbox mb_gen);
-    this.vinf = vinf;
+  function new(mailbox mb_gen);
     this.mb_gen = mb_gen;
   endfunction
   
   task start();
     repeat(5)
       begin
-        @(posedge vinf.clk)
-        #1
         trans = new();
         void'(trans.randomize());
         trans.check();
         mb_gen.put(trans);
-        trans.display("generator");
-       // #5;
-       
+        trans.display_line();
+        trans.display("GEN");        
+        @(next);     
       end
   endtask
   
