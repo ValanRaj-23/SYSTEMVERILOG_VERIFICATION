@@ -1,4 +1,4 @@
-class generator;
+class generator #(int times = 10);
   transaction trans;
   mailbox mb_gen;
   event next;
@@ -8,21 +8,17 @@ class generator;
   endfunction
   
   task start();
-    repeat(5);
+    repeat(times)
     begin
       
     trans = new();
-    void'(trans.randomize());
-      
+    void'(trans.randomize()); 
     mb_gen.put(trans);
-    trans.rst 	<= 1;
-    trans.en	<= 1;
-    trans.wr	<= 0;
+    
     trans.display_line();
     trans.display("GEN");
-    
-    @(next);
-     
+      
+    @(next); 
     end
   endtask
 endclass
