@@ -1,4 +1,3 @@
-`include "interface.sv"
 `include "transaction.sv"
 `include "generator.sv"
 `include "driver.sv"
@@ -6,12 +5,12 @@
 `include "scoreboard.sv"
 
 
-class environment;
+class environment #(int times = 30);
   transaction trans;
-  generator gen;
-  driver drv;
-  monitor mtr;
-  scoreboard sbd;
+  generator 	#(times) gen;
+  driver 		  #(times) drv;
+  monitor 		#(times) mtr;
+  scoreboard 	#(times) sbd;
   virtual intf vinf;
   event next_n;
   
@@ -24,16 +23,14 @@ class environment;
     mb_gen 	 =	new();
     mb_drv	 = 	new();
      
-    gen 	 = 	new(mb_gen);
-    drv 	 = 	new(mb_gen ,vinf);
-    mtr		 =	new(mb_drv ,vinf);
-    sbd		 =	new(mb_drv);
+    gen 	   = 	new(mb_gen);
+    drv 	   = 	new(vinf, mb_gen);
+    mtr		   =	new(vinf, mb_drv);
+    sbd		   =	new(mb_drv);
     
     gen.next = next_n;
     sbd.next = next_n;
-    $display("environment new");
-
-  
+    $display("environment new");  
   endfunction
   
   
