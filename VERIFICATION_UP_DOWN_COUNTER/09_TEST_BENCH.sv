@@ -1,16 +1,28 @@
-`include "environment.sv"
+`include "interface.sv"
+`include "test.sv"
 
-class test;
-  environment env;
-  virtual c_inf inf;  
+module tb;
+
+  always #5 inf.clk = ~inf.clk;
+  c_inf inf();
+  test tst;
+  up_down uut(inf);
   
-  function new(virtual c_inf inf);  
-    this.inf = inf;
-    env = new(inf);
-  endfunction
-
-  task run();
-    env.run();
-    $display("Test completed");
-  endtask
-endclass
+  initial begin
+    tst = new(inf);
+  end
+  
+  initial begin
+    tst.run();
+  end
+    
+  initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars;
+    #500;
+    $finish;
+    
+  end
+  
+endmodule
+    
