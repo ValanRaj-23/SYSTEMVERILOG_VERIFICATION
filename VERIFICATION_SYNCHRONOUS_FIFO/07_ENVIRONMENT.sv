@@ -10,10 +10,10 @@ import my_pkg::*;
 class environment;
   
   transaction trans;
-  generator 	  #(count) gen;
-  driver 		    #(count) drv;
-  monitor 		  #(count) mon;
-  score_board 	#(count) sbd;
+  generator 	 #(count) gen;
+  driver         #(count) drv;
+  monitor        #(count) mon;
+  score_board    #(count) sbd;
   virtual intf vinf;
   event move_n;
   
