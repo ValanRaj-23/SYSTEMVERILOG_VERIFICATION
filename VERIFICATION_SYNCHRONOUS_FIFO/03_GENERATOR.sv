@@ -11,15 +11,14 @@ class generator #(parameter count = 10);
 		repeat(count)
 	  	begin
           
-					trans = new();
-					void'(trans.randomize());
-					mb_gen.put(trans);
-          
-          trans.display_line();
-					trans.display("GEN");
-					@(move);
+			trans = new();
+			void'(trans.randomize());
+			mb_gen.put(trans);
+          		trans.display_line();
+			trans.display("GEN");
+			@(move);
 		
-        end
+        	end
 	endtask
   
 endclass
