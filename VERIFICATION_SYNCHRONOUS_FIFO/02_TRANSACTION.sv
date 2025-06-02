@@ -3,9 +3,9 @@ class transaction;
   	rand 	bit rst;
   	rand 	bit wr_en, rd_en;
   	rand 	bit [7:0] din;	
-  			bit full, empty;
-			bit [7:0] dout; 
-  			int count;
+  		bit full, empty;
+		bit [7:0] dout; 
+  		int count;	//to randomize reset condition
   
   constraint c1{ rst 	dist {1:=20, 0:=80};}
   constraint c2{ wr_en 	dist {1:=80, 0:=20};}
