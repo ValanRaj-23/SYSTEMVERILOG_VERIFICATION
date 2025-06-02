@@ -1,11 +1,11 @@
-module SYNC_FIFO(	input 		  clk,
-                 	input		    rst,
-		   			      input 		  wr_en,
-	      	   		  input 		  rd_en,
-                 	input 		  [7:0] din,
-	           		  output 		  full,
-	           		  output 		  empty,
-	           		  output reg 	[7:0]dout);
+module SYNC_FIFO(	input 		  	clk,
+                 	input		  	rst,
+		   	input 		  	wr_en,
+	      	   	input 		  	rd_en,
+		 	input 		[7:0]  	din,
+	           	output 		  	full,
+	           	output 		  	empty,
+		 	output reg 	[7:0]	dout);
   
 
   		reg [7:0] mem [7:0];
